@@ -62,7 +62,7 @@ async def predict(body: PredictionRequest):
 
         actor = Main_agent()
 
-        result = actor.check_is_answer_valid(body.query)
+        result = actor.check_is_question_valid(body.query)
 
         response = PredictionResponse(
             id=body.id,
