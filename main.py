@@ -67,7 +67,7 @@ async def predict(body: PredictionRequest):
 
         response = PredictionResponse(
             id=body.id,
-            answer=result,
+            answer=f"{result}",
             reasoning="Из информации на сайте",
             sources=sources,
         )
