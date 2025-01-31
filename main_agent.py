@@ -24,7 +24,7 @@ def get_check_is_valid_messages (answer: str):
             {
                 "role": "user",
             
-                "content": str
+                "content": answer
             }
         ]
 
@@ -41,4 +41,4 @@ class Main_agent:
 
     def check_is_answer_valid(answer: str):
          Fetch = AgentRequest()
-         Fetch.llm(str)
+         Fetch.llm(answer)
