@@ -3,6 +3,14 @@ aiologger[aiofiles]
 pip-chill
 uvicorn
 gunicorn
-dotenv
+python-dotenv
 requests
 openai
+faiss-cpu
+PyJWT
+cryptography
+googlesearch-python
+langchain-community
+angchain_openai
+langchain_core
+json

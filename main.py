@@ -5,11 +5,15 @@ from fastapi import FastAPI, HTTPException, Request, Response
 from pydantic import HttpUrl
 from schemas.request import PredictionRequest, PredictionResponse
 from utils.logger import setup_logger
-from main_agent import Main_agent
+from agents.main_agent import Main_agent
+from tools.vdb import config_vectors_storage
 
 # Initialize
 app = FastAPI()
 logger = None
+
+vector_storage = config_vectors_storage()
+
 
 
 @app.on_event("startup")
@@ -60,14 +64,14 @@ async def predict(body: PredictionRequest):
             HttpUrl("https://itmo.ru/ru/"),
             HttpUrl("https://abit.itmo.ru/"),
         ]
-
+        
         actor = Main_agent()
 
         result = actor.check_is_question_valid(body.query)
 
         response = PredictionResponse(
             id=body.id,
-            answer=f"{result}",
+            answer=result,
             reasoning="Из информации на сайте",
             sources=sources,
         )

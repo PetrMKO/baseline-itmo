@@ -1,23 +1,11 @@
-import requests
-
 from openai import OpenAI
+from tools.vdb import search_context
+import json
 
 client = OpenAI(
     api_key="sk-KQvzzbKNqChegfWRcIrdwcr4SnM8s95Z",
     base_url="https://api.proxyapi.ru/openai/v1",
 )
-
-def api_request(body):
-        api_url="https://api.proxyapi.ru/openai/v1/chat/completions"
-        api_key="sk-KQvzzbKNqChegfWRcIrdwcr4SnM8s95Z"
-
-
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + api_key
-        }
-
-        return requests.post(api_url, headers, json = body)
 
 def get_check_is_valid_messages (question):
      return [
@@ -51,16 +39,39 @@ def get_fetch_question_messages (question, context):
             }
         ]
 
-class AgentRequest:
-    def llm(self, messages):
-        return client.chat.completions.create(model="gpt-3.5-turbo", messages=messages).choices[0].message.content
+def llm_request( messages):
+    return client.chat.completions.create(model="gpt-3.5-turbo", messages=messages).choices[0].message.content
             
 
 class Main_agent:
+    def __init__(self, storage):
+         self.vectors_storage = storage
+
     def check_is_question_valid(self, question):
-         Fetch = AgentRequest()
-         return Fetch.llm(get_check_is_valid_messages(question))
+         return llm_request(get_check_is_valid_messages(question))
 
     def get_answer(self, question, context):
-         Fetch = AgentRequest()
-         return Fetch.llm(get_fetch_question_messages(question, context))
+         return llm_request(get_fetch_question_messages(question, context))
+    
+    def process_request(self, question):
+        is_question_valid = self.check_is_question_valid(question)
+        
+        results = search_context(self.storage, question)
+
+        contexts = []
+        sources = []
+
+        for document in results:
+            contexts.append( document[0].page_content)
+            sources.append( document[0].metadata["source"])
+
+        answer = self.get_answer(question, "|".join(contexts))
+
+        if answer: 
+            json_answer = json.loads(answer)
+            json_answer["sources"] = sources
+            return json_answer
+
+        
+
+

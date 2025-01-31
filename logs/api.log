@@ -1,0 +1,30 @@
+2025-01-31 08:10:27 | INFO | Incoming request: POST http://localhost:8080/api/request
+Request body: {
+  "query": "В каком городе находится главный кампус Университета ИТМО?\n1. Москва\n2. Санкт-Петербург\n3. Екатеринбург\n4. Нижний Новгород",
+  "id": 1
+}
+2025-01-31 08:10:27 | INFO | Processing prediction request with id: 1
+2025-01-31 08:10:27 | INFO | Successfully processed request 1
+2025-01-31 08:10:27 | INFO | Request completed: POST http://localhost:8080/api/request
+Status: 200
+Response body: {"id":1,"answer":"true","reasoning":"Из информации на сайте","sources":["https://itmo.ru/ru/","https://abit.itmo.ru/"]}
+Duration: 0.638s
+2025-01-31 08:10:48 | INFO | Incoming request: POST http://localhost:8080/api/request
+Request body: {
+  "query": "В каком городе находится главный кампус Университета ИТМО?\n1. Москва\n2. Санкт-Петербург\n3. Екатеринбург\n4. Нижний Новгород",
+  "id": 1
+}
+2025-01-31 08:10:48 | INFO | Processing prediction request with id: 1
+2025-01-31 08:10:49 | INFO | Successfully processed request 1
+2025-01-31 08:10:49 | INFO | Request completed: POST http://localhost:8080/api/request
+Status: 200
+Response body: {"id":1,"answer":"true","reasoning":"Из информации на сайте","sources":["https://itmo.ru/ru/","https://abit.itmo.ru/"]}
+Duration: 0.732s
+2025-01-31 08:19:04 | INFO | odict_keys([])
+2025-01-31 08:19:04 | INFO | odict_keys([])
+2025-01-31 08:19:05 | INFO | odict_keys([])
+2025-01-31 08:19:05 | INFO | odict_keys([])
+2025-01-31 08:21:39 | INFO | None
+2025-01-31 08:21:39 | INFO | None
+2025-01-31 08:21:39 | INFO | None
+2025-01-31 08:21:39 | INFO | None
