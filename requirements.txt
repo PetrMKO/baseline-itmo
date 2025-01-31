@@ -11,6 +11,7 @@ PyJWT
 cryptography
 googlesearch-python
 langchain-community
-angchain_openai
+langchain_openai
 langchain_core
-json
+aiohttp
+markdownify

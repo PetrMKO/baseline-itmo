@@ -7,12 +7,13 @@ from schemas.request import PredictionRequest, PredictionResponse
 from utils.logger import setup_logger
 from agents.main_agent import Main_agent
 from tools.vdb import config_vectors_storage
+import json
 
 # Initialize
 app = FastAPI()
 logger = None
 
-vector_storage = config_vectors_storage()
+[vector_storage, index] = config_vectors_storage()
 
 
 
@@ -58,23 +59,29 @@ async def log_requests(request: Request, call_next):
 async def predict(body: PredictionRequest):
     try:
         await logger.info(f"Processing prediction request with id: {body.id}")
-        # Здесь будет вызов вашей модели
-        answer = 1  # Замените на реальный вызов модели
-        sources: List[HttpUrl] = [
-            HttpUrl("https://itmo.ru/ru/"),
-            HttpUrl("https://abit.itmo.ru/"),
-        ]
-        
-        actor = Main_agent()
 
-        result = actor.check_is_question_valid(body.query)
+        agent = Main_agent(vector_storage, logger)
+
+        result = await agent.process_request(body.query)
+
+        await logger.info(index.ntotal)
+ # Здесь будет вызов вашей модели
+        answer = int(result["answer"])
+
+        sources: List[HttpUrl] = []
+
+        for link in result["sources"]:
+            sources.append(HttpUrl(link))
 
         response = PredictionResponse(
             id=body.id,
-            answer=result,
-            reasoning="Из информации на сайте",
+            answer=answer,
+            reasoning=result["reasoning"] + " Ответ сгенерирован моделью gpt-4o-mini",
             sources=sources,
         )
+
+        await logger.info(response)
+
         await logger.info(f"Successfully processed request {body.id}")
         return response
     except ValueError as e:

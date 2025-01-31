@@ -32,17 +32,17 @@ def config_vectors_storage():
 
    index = faiss.IndexFlatL2(vector_len)
 
-   return FAISS(
+   return [FAISS(
       embedding_function=embeddings,
       index=index,
       docstore=InMemoryDocstore(),
       index_to_docstore_id={},
-   )
+   ),]
 
 
 def config_vectors_storage_push(storage, text: str, url: str):
-   storage.add_documents([get_document(text, url)])
+   storage.add_documents(documents=[get_document(text, url)])
 
 
 def search_context(storage, query: str):
-   return storage.similarity_search_with_relevance_scores("В каком году Университет ИТМО был включён в число Национальных исследовательских университетов России?", k=3)
+   return storage.similarity_search_with_relevance_scores(query, k=3)

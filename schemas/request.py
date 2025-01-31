@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 
 from pydantic import BaseModel, HttpUrl
 
@@ -10,6 +10,6 @@ class PredictionRequest(BaseModel):
 
 class PredictionResponse(BaseModel):
     id: int
-    answer: int
+    answer: Union[int, None]
     reasoning: str
     sources: List[HttpUrl]
