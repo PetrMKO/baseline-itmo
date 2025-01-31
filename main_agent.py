@@ -37,8 +37,6 @@ class AgentRequest:
             
 
 class Main_actor:
-    
-
-    def check_is_answer_valid(self, answer: str):
+    def check_is_answer_valid(self, answer):
          Fetch = AgentRequest()
          Fetch.llm(answer)
