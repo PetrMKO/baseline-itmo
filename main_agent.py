@@ -55,7 +55,7 @@ class AgentRequest:
             })
             
 
-class Main_actor:
+class Main_agent:
     def check_is_question_valid(self, question):
          Fetch = AgentRequest()
          return Fetch.llm(get_check_is_valid_messages(question))
