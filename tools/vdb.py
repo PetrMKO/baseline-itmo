@@ -37,7 +37,7 @@ def config_vectors_storage():
       index=index,
       docstore=InMemoryDocstore(),
       index_to_docstore_id={},
-   ),]
+   ), index]
 
 
 def config_vectors_storage_push(storage, text: str, url: str):
