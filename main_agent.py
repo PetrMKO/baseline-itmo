@@ -4,8 +4,8 @@ from dotenv import dotenv_values
 config = dotenv_values(".env")
 
 def api_request(body):
-        api_url=config.LLM_API_URL
-        api_key=config.LLM_API_KEY
+        api_url=config['LLM_API_URL']
+        api_key=config['LLM_API_KEY']
 
         headers={
             "Content-Type": "application/json",
