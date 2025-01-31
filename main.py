@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException, Request, Response
 from pydantic import HttpUrl
 from schemas.request import PredictionRequest, PredictionResponse
 from utils.logger import setup_logger
-from main_agent import check_is_answer_valid
+from main_agent import Main_agent
 # Initialize
 app = FastAPI()
 logger = None
@@ -60,13 +60,13 @@ async def predict(body: PredictionRequest):
             HttpUrl("https://abit.itmo.ru/"),
         ]
 
-        await logger.info(f"{body.query}")
+        actor = Main_agent()
 
-        # result = check_is_answer_valid(body.query)
+        result = actor.check_is_answer_valid(body.query)
 
         response = PredictionResponse(
             id=body.id,
-            answer=result,
+            answer=answer,
             reasoning="Из информации на сайте",
             sources=sources,
         )

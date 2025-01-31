@@ -14,7 +14,7 @@ def api_request(body):
 
         return requests.post(api_url, headers, json = body)
 
-def get_check_is_valid_messages (answer):
+def get_check_is_valid_messages (answer: str):
      return [
        
             {
@@ -26,15 +26,19 @@ def get_check_is_valid_messages (answer):
             
                 "content": answer
             }
-        ]
-
+    ]
+class AgentRequest:
     
-def llm(messages):
-    return api_request({
-        "model": "gpt-4-turbo",
-            "messages": messages
-        })
-        
+    def llm(self, messages):
+        return api_request({
+            "model": "gpt-4-turbo",
+             "messages": messages
+            })
+            
 
-def check_is_answer_valid(answer):
-    llm(answer)
+class Main_actor:
+    
+
+    def check_is_answer_valid(self, answer: str):
+         Fetch = AgentRequest()
+         Fetch.llm(answer)
