@@ -62,7 +62,7 @@ async def predict(body: PredictionRequest):
 
         await logger.info(f"{body.query}")
 
-        result = check_is_answer_valid(body.query)
+        # result = check_is_answer_valid(body.query)
 
         response = PredictionResponse(
             id=body.id,
