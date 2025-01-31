@@ -1,7 +1,11 @@
 import requests
-from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="sk-KQvzzbKNqChegfWRcIrdwcr4SnM8s95Z",
+    base_url="https://api.proxyapi.ru/openai/v1",
+)
 
 def api_request(body):
         api_url="https://api.proxyapi.ru/openai/v1/chat/completions"
@@ -48,12 +52,8 @@ def get_fetch_question_messages (question, context):
         ]
 
 class AgentRequest:
-    
     def llm(self, messages):
-        return api_request({
-            "model": "gpt-4-turbo",
-             "messages": messages
-            })
+        return client.chat.completions.create(model="gpt-3.5-turbo", messages=messages).choices[0].message.content
             
 
 class Main_agent:
