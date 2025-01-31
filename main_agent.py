@@ -37,7 +37,7 @@ class AgentRequest:
             })
             
 
-class Main_actor:
+class Main_agent:
 
     def check_is_answer_valid(answer: str):
          Fetch = AgentRequest()
