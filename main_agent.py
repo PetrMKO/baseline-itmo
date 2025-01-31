@@ -28,17 +28,13 @@ def get_check_is_valid_messages (answer):
             }
         ]
 
-class AgentRequest:
     
-    def llm(messages):
-        return api_request({
-            "model": "gpt-4-turbo",
-             "messages": messages
-            })
-            
+def llm(messages):
+    return api_request({
+        "model": "gpt-4-turbo",
+            "messages": messages
+        })
+        
 
-class Main_agent:
-
-    def check_is_answer_valid(answer):
-         Fetch = AgentRequest()
-         Fetch.llm(answer)
+def check_is_answer_valid(answer):
+    llm(answer)
