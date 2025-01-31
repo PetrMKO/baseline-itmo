@@ -6,6 +6,10 @@ from pydantic import HttpUrl
 from schemas.request import PredictionRequest, PredictionResponse
 from utils.logger import setup_logger
 from main_agent import Main_agent
+from dotenv import dotenv_values
+
+config = dotenv_values(".env")
+
 # Initialize
 app = FastAPI()
 logger = None
@@ -53,6 +57,7 @@ async def log_requests(request: Request, call_next):
 async def predict(body: PredictionRequest):
     try:
         await logger.info(f"Processing prediction request with id: {body.id}")
+        await logger.info(config)
         # Здесь будет вызов вашей модели
         answer = 1  # Замените на реальный вызов модели
         sources: List[HttpUrl] = [
