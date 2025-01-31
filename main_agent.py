@@ -14,7 +14,7 @@ def api_request(body):
 
         return requests.post(api_url, headers, json = body)
 
-def get_check_is_valid_messages (answer: str):
+def get_check_is_valid_messages (answer):
      return [
        
             {
@@ -39,6 +39,6 @@ class AgentRequest:
 
 class Main_agent:
 
-    def check_is_answer_valid(answer: str):
+    def check_is_answer_valid(answer):
          Fetch = AgentRequest()
          Fetch.llm(answer)
