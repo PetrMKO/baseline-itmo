@@ -60,6 +60,8 @@ async def predict(body: PredictionRequest):
             HttpUrl("https://abit.itmo.ru/"),
         ]
 
+        await logger.info(f"{body.query}")
+
         result = check_is_answer_valid(body.query)
 
         response = PredictionResponse(
